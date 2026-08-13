@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TERRÆ — A Digital Archive of Earth
 
-## Getting Started
+[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-terrae--steel.vercel.app-c47c3a?style=for-the-badge&logo=vercel)](https://terrae-steel.vercel.app/)
 
-First, run the development server:
+> **One Planet. Infinite Worlds.**  
+> An immersive, editorial digital archive dedicated to documenting the scale, diversity, and beauty of planet Earth — from microscopic cellular structures to continental biomes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌐 Live Experience
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visit the official live deployment:  
+👉 **[https://terrae-steel.vercel.app/](https://terrae-steel.vercel.app/)**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🌿 Overview & Design Philosophy
 
-To learn more about Next.js, take a look at the following resources:
+**TERRÆ** (*Latin for "of the Earth"*) blends editorial design, documentary nature photography, asymmetric typography, and high-precision micro-interactions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Editorial Variance:** Asymmetric grid compositions featuring high-contrast pairing of *Cormorant Garamond* (Display Serif) and *Outfit* (Sans-serif).
+- **Interactive Archives:** Explore 8 continental biomes, high-definition species profiles, macro vs. micro scale duality, and photographic archives.
+- **Cinematic Motion:** Smooth eased scrolling, custom cursor states, staggered fullscreen overlay navigation, and hover reveals.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠 Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework:** [Next.js](https://nextjs.org/) (App Router, Turbopack)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS & Custom CSS Token System
+- **Fonts:** Cormorant Garamond, Outfit, JetBrains Mono
+- **Deployment:** [Vercel](https://vercel.com/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📜 License & Credits
+
+Designed & Developed for **TERRÆ — Earth Archive**.  
+© 2026 TERRÆ. All rights reserved.
