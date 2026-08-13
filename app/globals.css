@@ -1,0 +1,364 @@
+@import "tailwindcss";
+
+/* ─── TERRÆ DESIGN TOKENS ───────────────────────────────────────── */
+:root {
+  --black:   #0a0a09;
+  --stone:   #1c1b18;
+  --ash:     #2e2d28;
+  --charcoal:#3d3c36;
+  --fog:     #8a8778;
+  --sand:    #c4b99a;
+  --bone:    #e8e2d4;
+  --white:   #f5f2eb;
+  --ocean:   #1a3a4a;
+  --moss:    #1e3226;
+  --copper:  #c47c3a;
+  --copper-light: #d99a5e;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:    'Outfit', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.76, 0, 0.24, 1);
+
+  --nav-h: 72px;
+}
+
+/* ─── BASE ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--black);
+  color: var(--bone);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* ─── CUSTOM CURSOR ─────────────────────────────────────────────── */
+#cursor-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--copper);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s var(--ease-out-expo), height 0.2s var(--ease-out-expo), background 0.2s;
+  mix-blend-mode: normal;
+}
+
+#cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(196, 124, 58, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s var(--ease-out-expo);
+}
+
+#cursor-label {
+  position: fixed;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--copper);
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+body.cursor-explore #cursor-dot { width: 0px; height: 0px; }
+body.cursor-explore #cursor-ring { width: 80px; height: 80px; border-color: var(--copper); }
+body.cursor-explore #cursor-label { opacity: 1; margin-top: 48px; }
+
+/* ─── SCROLLBAR ─────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--ash); }
+::-webkit-scrollbar-thumb:hover { background: var(--fog); }
+
+/* ─── TYPOGRAPHY SCALE ──────────────────────────────────────────── */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+}
+
+.t-headline {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--fog);
+}
+
+.t-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fog);
+}
+
+.t-number {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+/* ─── LAYOUT UTILITIES ──────────────────────────────────────────── */
+.container-editorial {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+}
+
+.grid-editorial {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+/* ─── SECTION DIVIDER ───────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ash) 20%, var(--ash) 80%, transparent);
+}
+
+/* ─── IMAGE TREATMENTS ──────────────────────────────────────────── */
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.img-cinematic {
+  filter: contrast(1.05) saturate(0.85);
+}
+
+/* ─── COORD BADGE ───────────────────────────────────────────────── */
+.coord-badge {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid var(--ash);
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fog);
+}
+
+/* ─── COPPER ACCENT ─────────────────────────────────────────────── */
+.accent { color: var(--copper); }
+
+/* ─── REVEAL ANIMATION ──────────────────────────────────────────── */
+.reveal-clip {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.9s var(--ease-out-expo);
+}
+.reveal-clip.in-view {
+  clip-path: inset(0% 0 0 0);
+}
+
+/* ─── NAV TRANSITION ────────────────────────────────────────────── */
+.nav-solid {
+  background: rgba(10, 10, 9, 0.95) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ash) !important;
+}
+
+/* ─── HORIZONTAL SCROLL TRACK ───────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── SELECTION ─────────────────────────────────────────────────── */
+::selection {
+  background: var(--copper);
+  color: var(--black);
+}
+
+/* ─── REDUCED MOTION ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ─── MOBILE CURSOR FIX ─────────────────────────────────────────── */
+@media (hover: none) {
+  body { cursor: auto; }
+  #cursor-dot, #cursor-ring, #cursor-label { display: none; }
+}
+
+/* ─── KEYFRAMES ─────────────────────────────────────────────────── */
+@keyframes terrae-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}
+
+/* ─── MISSING UTILITIES ──────────────────────────────────────────── */
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+/* ─── MOBILE RESPONSIVE OVERRIDES ───────────────────────────────── */
+
+/* Species grid — mobile: single column */
+@media (max-width: 767px) {
+  .species-grid > div {
+    grid-column: span 12 !important;
+    height: clamp(280px, 60vw, 380px) !important;
+  }
+}
+
+/* PlanetData — mobile: single column */
+@media (max-width: 767px) {
+  .planet-data-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Gallery — mobile: simplified grid */
+@media (max-width: 767px) {
+  .gallery-grid > div {
+    grid-column: span 12 !important;
+    grid-row: span 1 !important;
+    height: clamp(220px, 60vw, 340px) !important;
+  }
+}
+
+/* FinalCTA headline — mobile stack */
+@media (max-width: 767px) {
+  .cta-grid-col-right {
+    grid-column: 1 / -1 !important;
+    padding-top: 2rem;
+  }
+  .cta-grid-col-left {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* Manifesto — mobile: full width */
+@media (max-width: 767px) {
+  .manifesto-col {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* Footer — mobile: single column */
+@media (max-width: 767px) {
+  .footer-col-brand { grid-column: 1 / -1 !important; }
+  .footer-col-nav { grid-column: 1 / 7 !important; margin-top: 2rem; }
+  .footer-col-archive { grid-column: 7 / -1 !important; margin-top: 2rem; }
+}
+
+/* 12-col grids: cap at 2-col on tablet */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .planet-data-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+.scroll-indicator-line > div {
+  animation: scroll-line 1.8s ease-in-out infinite;
+}
+
+/* ─── GLOBAL INTERACTION ANIMATIONS ─────────────────────────────── */
+
+/* All anchor tags and buttons: base transition */
+a, button {
+  transition-property: color, background-color, border-color, opacity, transform, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tactile press feedback on all buttons */
+button:active,
+a:active {
+  transform: scale(0.97) !important;
+}
+
+/* Primary CTA buttons (copper background) */
+a[style*="background: var(--copper)"],
+a[style*="background:var(--copper)"] {
+  transition:
+    background-color 0.3s cubic-bezier(0.16,1,0.3,1),
+    transform 0.4s cubic-bezier(0.16,1,0.3,1),
+    box-shadow 0.4s cubic-bezier(0.16,1,0.3,1) !important;
+}
+a[style*="background: var(--copper)"]:hover,
+a[style*="background:var(--copper)"]:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 32px rgba(196, 124, 58, 0.25) !important;
+}
+a[style*="background: var(--copper)"]:active,
+a[style*="background:var(--copper)"]:active {
+  transform: translateY(-1px) !important;
+}
+
+/* Text links with border-bottom (editorial CTAs) */
+a[style*="border-bottom"] {
+  transition:
+    color 0.3s cubic-bezier(0.16,1,0.3,1),
+    border-color 0.3s cubic-bezier(0.16,1,0.3,1),
+    opacity 0.3s !important;
+}
+a[style*="border-bottom"]:hover {
+  letter-spacing: 0.25em !important;
+}
+
+/* Smooth focus rings for keyboard nav */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Image hover — global subtle lift */
+img {
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
+  will-change: transform;
+}
+
+/* ─── SMOOTH PAGE SCROLL ANCHOR ─────────────────────────────────── */
+:target {
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
